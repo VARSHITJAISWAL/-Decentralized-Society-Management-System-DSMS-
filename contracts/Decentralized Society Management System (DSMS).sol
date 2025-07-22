@@ -69,5 +69,46 @@ contract DSMS {
         waterLogs[user].monthlyBill += bill;
         emit WaterUpdated(user, jars, bill);
     }
-}
 
+    // -------- User Summary --------
+    /// @notice Returns the summary of a user's records
+    /// @param user The address of the user
+    /// @return maintenancePaid Whether maintenance is paid
+    /// @return maintenanceAmount Amount paid for maintenance
+    /// @return milkDays Days milk was received
+    /// @return milkQty Total quantity of milk received
+    /// @return milkBill Total milk bill
+    /// @return waterDays Days water was delivered
+    /// @return waterJars Total water jars received
+    /// @return waterBill Total water bill
+
+    function getUserSummary(address user)
+        external
+        view
+        returns (
+            bool maintenancePaid,
+            uint256 maintenanceAmount,
+            uint256 milkDays,
+            uint256 milkQty,
+            uint256 milkBill,
+            uint256 waterDays,
+            uint256 waterJars,
+            uint256 waterBill
+        )
+    {
+        Maintenance memory m = maintenanceRecords[user];
+        MilkRecord memory milk = milkLogs[user];
+        WaterRecord memory water = waterLogs[user];
+
+        return (
+            m.paid,
+            m.amount,
+            milk.daysReceived,
+            milk.quantityTotal,
+            milk.monthlyBill,
+            water.daysDelivered,
+            water.jarsReceived,
+            water.monthlyBill
+        );
+    }
+}
