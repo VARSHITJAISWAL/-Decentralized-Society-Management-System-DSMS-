@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MiT
 pragma solidity ^0.8.0;
 
 /// @title Decentralized Society Management System (DSMS)
